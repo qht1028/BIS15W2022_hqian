@@ -1,6 +1,6 @@
 ---
 title: "Dummy Push"
-author: "Hongtao (Steve) Qian"
+author: "Hongtao Qian"
 date: "`r Sys.Date()`"
 output: html_document
 ---
