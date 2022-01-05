@@ -1,7 +1,7 @@
 ---
 title: "Lab 1 Homework"
-author: "Please Add Your Name Here"
-date: "2021-12-27"
+author: "Hongtao Qian Steve"
+date: "2022-01-04"
 output:
   html_document: 
     theme: spacelab
@@ -17,26 +17,81 @@ Make sure to use the formatting conventions of RMarkdown to make your report nea
 
 **2. What is the difference between R and RStudio? What is GitHub and why is it useful to programmers?**  
 
+* #### R is a type of language for programming. Rstudio is the GUI to for R language. Github is the platform where users store their codes and share codes for collboration. 
+
 **3. Navigate to my [BIS15L](https://github.com/jmledford3115/BIS15LW2022_jledford) repository on GitHub. Notice that near the bottom there is a nice, clean description of the repository. You want this on your repository! It is built by making edits to the `README.md` file using the RMarkdown conventions. Edit your repository's `README.md` file so that you have a clean informative description, including your email address. Be creative! You don't need to just copy mine. There are lots of examples online.**  
 
 **4. Calculate the following expressions. Be sure to include each one in a separate code chunk.**  
   + 5 - 3 * 2  
   + 8 / 2 ** 2  
-  
+
+```r
+5 - 3 * 2
+```
+
+```
+## [1] -1
+```
+
+```r
+8 / 2 ** 2
+```
+
+```
+## [1] 2
+```
+
 **5. Did any of the results in #4 surprise you? Write two programs that calculate each expression such that the result for the first example is 4 and the second example is 16.**    
+
+```r
+(5 - 3)*2
+```
+
+```
+## [1] 4
+```
+
+```r
+(8 / 2)**2
+```
+
+```
+## [1] 16
+```
+* #### Most interesting point is that the code "**" behaves like "^" instead of multiplying twice. 
+
 
 **6. `Objects` in R are a way in which we can store data or operations. We will talk more about objects next week. For now, make a new object `pi` as 3.14159265359 by running the following code chunk. You should now see the object `pi` in the environment window in the top right.**  
 
 ```r
 pi <- 3.14159265359
+  print(pi)
 ```
 
-**7. Let's say we want to multiply `pi` by 2. Using the same arithmetic principles that we just learned, write a code chunk that performs this operation using the object we created.**  
+```
+## [1] 3.141593
+```
+
+**7. Let's say we want to multiply `pi` by 2. Using the same arithmetic principles that we just learned, write a code chunk that performs this operation using the object we created.**
+
+```r
+pI <- 2*pi
+print(pI)
+```
+
+```
+## [1] 6.283185
+```
+
 
 **8. In order to get help with any command in R, just type a `?` in front the command of interest. Practice this by running the following code chunk.**  
 
 ```r
 ?mean
+```
+
+```
+## starting httpd help server ... done
 ```
 
 **9. Let's calculate the mean for the numbers 2, 8, 6, 4, 9, 10. I have built an object `x` for you below so all you need to do is run the first code chunk and then create a second code chunk that shows the calculation. Give it a try!**  
@@ -45,7 +100,28 @@ pi <- 3.14159265359
 x <- c(2, 8, 6, 6, 7, 4, 9, 9, 9, 10)
 ```
 
+```r
+xmean <- x
+xmean <- mean(xmean)
+  print(xmean)
+```
+
+```
+## [1] 7
+```
+
 **10. Repeat the procedure above, but this time calculate the median.**  
+
+```r
+xmedian <- x
+xmedian <- median(xmedian)
+  print(xmedian)
+```
+
+```
+## [1] 7.5
+```
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.  
