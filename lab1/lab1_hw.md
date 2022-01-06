@@ -1,7 +1,7 @@
 ---
 title: "Lab 1 Homework"
 author: "Hongtao Qian Steve"
-date: "2022-01-04"
+date: "2022-01-06"
 output:
   html_document: 
     theme: spacelab
