@@ -63,14 +63,6 @@ sleep
 3. What are the dimensions of this data frame (variables and observations)? How do you know? Please show the *code* that you used to determine this below.  
 
 ```r
-dim(sleep)
-```
-
-```
-## [1] 83 11
-```
-
-```r
 str(sleep)
 ```
 
