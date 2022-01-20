@@ -106,17 +106,30 @@ penguins %>%
 ## Practice
 1. Produce a summary of the mean for bill_length_mm, bill_depth_mm, flipper_length_mm, and body_mass_g within Adelie penguins only. Be sure to provide the number of samples.
 ```{r}
-
+penguins%>%
+  filter(species=="Adelie")%>%
+  summarize(mean_bill_length=mean(bill_length_mm, na.rm = TRUE), 
+            mean_bill_depth=mean(bill_depth_mm, na.rm = TRUE),
+            mean_flipper_length=mean(flipper_length_mm, na.rm = TRUE), 
+            mean_body_mass=mean(body_mass_g, na.rm = TRUE), 
+            n=n())
 ```
 
 2. How does the mean of `bill_length_mm` compare between penguin species?
 ```{r}
-
+penguins%>%
+  select(species, bill_length_mm)%>%
+  filter(!is.na(bill_length_mm))%>%
+  group_by(species)%>%
+  summarize(mean_bill_length=mean(bill_length_mm), 
+            n=n())
 ```
 
 3. For some penguins, their sex is listed as NA. Where do these penguins occur?
 ```{r}
-
+penguins%>%
+  filter(is.na(sex))%>%
+  count(island)
 ```
 
 ## `across()`
@@ -176,7 +189,12 @@ penguins %>%
 1. Produce separate summaries of the mean and standard deviation for bill_length_mm, bill_depth_mm, and flipper_length_mm for each penguin species. Be sure to provide the number of samples.  
 mean
 ```{r}
-
+penguins%>%
+  group_by(species)%>%
+  summarize(across(ends_with("mm"), mean, na.rm=TRUE))
+penguins%>%
+  group_by(species)%>%
+  summarize(across(ends_with("mm"), sd, na.rm=TRUE))
 ```
 
 ## Wrap-up  

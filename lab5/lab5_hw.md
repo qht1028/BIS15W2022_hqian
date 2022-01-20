@@ -1,6 +1,6 @@
 ---
 title: "dplyr Superhero"
-date: "2022-01-18"
+date: "2022-01-20"
 output:
   html_document: 
     keep_md: yes
@@ -723,48 +723,21 @@ superhero_powers%>%
 
 ```r
 superhero_powers%>%
-  filter(hero_names=="Black Widow")
+  filter(hero_names=="Black Widow")%>%
+  select_if(all_vars(.=="TRUE"))
 ```
 
 ```
-## # A tibble: 1 x 168
-##   hero_names  agility accelerated_healing lantern_power_ri~ dimensional_awarene~
-##   <chr>       <lgl>   <lgl>               <lgl>             <lgl>               
-## 1 Black Widow TRUE    FALSE               FALSE             FALSE               
-## # ... with 163 more variables: cold_resistance <lgl>, durability <lgl>,
-## #   stealth <lgl>, energy_absorption <lgl>, flight <lgl>, danger_sense <lgl>,
-## #   underwater_breathing <lgl>, marksmanship <lgl>, weapons_master <lgl>,
-## #   power_augmentation <lgl>, animal_attributes <lgl>, longevity <lgl>,
-## #   intelligence <lgl>, super_strength <lgl>, cryokinesis <lgl>,
-## #   telepathy <lgl>, energy_armor <lgl>, energy_blasts <lgl>,
-## #   duplication <lgl>, size_changing <lgl>, density_control <lgl>,
-## #   stamina <lgl>, astral_travel <lgl>, audio_control <lgl>, dexterity <lgl>,
-## #   omnitrix <lgl>, super_speed <lgl>, possession <lgl>,
-## #   animal_oriented_powers <lgl>, weapon_based_powers <lgl>,
-## #   electrokinesis <lgl>, darkforce_manipulation <lgl>, death_touch <lgl>,
-## #   teleportation <lgl>, enhanced_senses <lgl>, telekinesis <lgl>,
-## #   energy_beams <lgl>, magic <lgl>, hyperkinesis <lgl>, jump <lgl>,
-## #   clairvoyance <lgl>, dimensional_travel <lgl>, power_sense <lgl>,
-## #   shapeshifting <lgl>, peak_human_condition <lgl>, immortality <lgl>,
-## #   camouflage <lgl>, element_control <lgl>, phasing <lgl>,
-## #   astral_projection <lgl>, electrical_transport <lgl>, fire_control <lgl>,
-## #   projection <lgl>, summoning <lgl>, enhanced_memory <lgl>, reflexes <lgl>,
-## #   invulnerability <lgl>, energy_constructs <lgl>, force_fields <lgl>,
-## #   self_sustenance <lgl>, anti_gravity <lgl>, empathy <lgl>,
-## #   power_nullifier <lgl>, radiation_control <lgl>, psionic_powers <lgl>,
-## #   elasticity <lgl>, substance_secretion <lgl>,
-## #   elemental_transmogrification <lgl>, technopath_cyberpath <lgl>,
-## #   photographic_reflexes <lgl>, seismic_power <lgl>, animation <lgl>,
-## #   precognition <lgl>, mind_control <lgl>, fire_resistance <lgl>,
-## #   power_absorption <lgl>, enhanced_hearing <lgl>, nova_force <lgl>,
-## #   insanity <lgl>, hypnokinesis <lgl>, animal_control <lgl>,
-## #   natural_armor <lgl>, intangibility <lgl>, enhanced_sight <lgl>,
-## #   molecular_manipulation <lgl>, heat_generation <lgl>, adaptation <lgl>,
-## #   gliding <lgl>, power_suit <lgl>, mind_blast <lgl>,
-## #   probability_manipulation <lgl>, gravity_control <lgl>, regeneration <lgl>,
-## #   light_control <lgl>, echolocation <lgl>, levitation <lgl>,
-## #   toxin_and_disease_control <lgl>, banish <lgl>, energy_manipulation <lgl>,
-## #   heat_resistance <lgl>, ...
+## Warning: The `.predicate` argument of `select_if()` can't contain quosures. as of dplyr 0.8.3.
+## Please use a one-sided formula, a function, or a function name.
+```
+
+```
+## # A tibble: 1 x 9
+##   agility stealth marksmanship weapons_master longevity intelligence stamina
+##   <lgl>   <lgl>   <lgl>        <lgl>          <lgl>     <lgl>        <lgl>  
+## 1 TRUE    TRUE    TRUE         TRUE           TRUE      TRUE         TRUE   
+## # ... with 2 more variables: peak_human_condition <lgl>, reflexes <lgl>
 ```
 
 ## Push your final code to GitHub!

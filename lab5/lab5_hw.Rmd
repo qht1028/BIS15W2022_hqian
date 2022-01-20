@@ -168,7 +168,8 @@ superhero_powers%>%
 15. Pick your favorite superhero and let's see their powers!
 ```{r}
 superhero_powers%>%
-  filter(hero_names=="Black Widow")
+  filter(hero_names=="Black Widow")%>%
+  select_if(all_vars(.=="TRUE"))
 ```
 
 ## Push your final code to GitHub!
