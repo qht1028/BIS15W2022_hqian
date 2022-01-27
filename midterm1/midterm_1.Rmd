@@ -133,4 +133,4 @@ vertebrate%>%
   group_by(hunt_cat)%>%
   summarise(bird_evenness=mean(evenness_bird_species), bird_rich=mean(rich_bird_species), bird_diversity=mean(diversity_bird_species))
 ```
-#### I assume there is a food chain between cat and birds, so there should be a relationship betweem cat hunting and bird ecological situation. Surprisingly, the difference for bird evenness, richness, and diversity among transects with distinct hunting rate is not significant. 
+#### I assume there is a food chain between cat and birds, so there should be a relationship betweem cat hunting and bird ecological situation. Transect without hunting has the highest bird diversity and bir evenness, but moderate hunting activity can negatively impact bird diversity and evenness. Surprisingly, high hunting activity can slightly rescue bird eveness and diversity. 
