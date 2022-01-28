@@ -122,23 +122,24 @@ amniota <- readr::read_csv("data/amniota.csv")
 ```
 
 ```{r}
-
+any_na(amniota)
 ```
 
 2. Use one of the tools explained above to summarize NA's in the data.
 ```{r}
-
+amniota%>%
+  purrr::map_df(~ sum(is.na(.)))
 ```
 
 
 3. What's going on here? Try using the `hist` function on one or more of the continuous variables.
 
 ```{r}
-
+hist(amniota$birth_or_hatching_weight_g)
 ```
 
 4. Given that we know that the output of #2 is wrong, what do you think is the best approach for dealing with NA's in the `amniote` data?  
-
+#### Replace the data '-999' with NA. 
 
 ## Replacing values with NA
 If you are certain that NA's are represented by a specific value in the data, the best way to deal with them is to replace the value with NA. This is similar to a find & replace function in excel. Although you can do this when you import the data, in most cases you will need to (and should!) do some exploration first.  
@@ -194,33 +195,36 @@ For the following examples, we will use the `life_history` data for mammals. The
 
 1. Load the mammals life history data v2. Do you see any NA's?  
 ```{r}
-
+life_history <- readr::read_csv("data/mammal_lifehistories_v2.csv")
+any_na(life_history)
 ```
 
 
 2. Explore the data using any method that you prefer. `skimr` provides a nice output with histograms for numeric variables.  
 ```{r}
-
+skim(life_history)
 ```
 
 
 3. Replace the entries that represent NA's in the data using `na_if()`. Double check your work.
 ```{r}
-
+life_history_tidy <- life_history%>%
+  na_if(-999)
 ```
 
 ```{r}
-
+skim(life_history_tidy)
 ```
 
 ```{r}
-
+any_na(life_history_tidy)
 ```
 
 
 4. In which variable are the most NAs in the data frame?
 ```{r}
-
+life_history_tidy%>%
+  purrr::map_df(~sum(is.na(.)))
 ```
 
 

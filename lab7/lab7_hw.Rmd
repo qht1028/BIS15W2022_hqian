@@ -1,11 +1,11 @@
 ---
 title: "Lab 7 Homework"
-author: "Joel Ledford"
+author: "Hongtao Qian"
 date: "`r Sys.Date()`"
 output:
   html_document: 
-    theme: spacelab
     keep_md: yes
+    theme: spacelab
 ---
 
 ```{r setup, include=FALSE}
@@ -32,7 +32,8 @@ Myhrvold N, Baldridge E, Chan B, Sivam D, Freeman DL, Ernest SKM (2015). “An a
 database to perform comparative analyses with birds, mammals, and reptiles.” _Ecology_, *96*, 3109.
 doi: 10.1890/15-0846.1 (URL: https://doi.org/10.1890/15-0846.1).
 ```{r}
-
+amniota <- readr::read_csv("data/amniota.csv")
+head(amniota, n=5)
 ```
 
 `amphibio` data:  
@@ -40,60 +41,94 @@ Oliveira BF, São-Pedro VA, Santos-Barrera G, Penone C, Costa GC (2017). “Amph
 for amphibian ecological traits.” _Scientific Data_, *4*, 170123. doi: 10.1038/sdata.2017.123 (URL:
 https://doi.org/10.1038/sdata.2017.123).
 ```{r}
-
+amphibio <- readr::read_csv("data/amphibio.csv")
+head(amphibio, n=5)
 ```
 
 ## Questions  
 **2. Do some exploratory analysis of the `amniota` data set. Use the function(s) of your choice. Try to get an idea of how NA's are represented in the data.**  
 ```{r}
-
+skim(amniota)
 ```
+
+#### In this data frame, *-999* is used to represet *NA*. 
 
 **3. Do some exploratory analysis of the `amphibio` data set. Use the function(s) of your choice. Try to get an idea of how NA's are represented in the data.**  
 ```{r}
-
+skim(amphibio)
 ```
+
+#### In this data frame, *NA* seems to be used, but why there are *NA* in column of binary values? 
 
 **4. How many total NA's are in each data set? Do these values make sense? Are NA's represented by values?**   
 
 `amniota`  
 ```{r}
-
+amniota%>%
+  purrr::map_df(~ sum(is.na(.)))
 ```
+#### No *NA* used in original data frame. 
 
 `amphibio`  
 ```{r}
-
+amphibio%>%
+  naniar::miss_var_summary()%>%
+  summarise(total_miss=sum(n_miss))
 ```
+#### Well, over 170000 *NA*s in this data frame. I think this is too much. 
 
 **5. Make any necessary replacements in the data such that all NA's appear as "NA".**   
 ```{r}
+amniota_tidy <- amniota %>%
+  na_if(-999)
+#purrr::map_df(~ sum(is.na(.)))
+head(amniota_tidy,n=5)
 
+amphibio_tidy <- amphibio%>%
+  mutate_at(c("Fos", "Ter", "Aqu", "Arb", "Leaves", "Flowers", "Seeds", "Fruits", "Arthro", "Vert", "Diu", "Noc", "Crepu", "Wet_warm", "Wet_cold", "Dry_warm", "Dry_cold"), ~replace(., is.na(.), 0))
+head(amphibio_tidy, n=5)
 ```
+#### For data frame *amniota*, *NA* is properly used to replace *-999*. For data frame *amphibio*, extra *NA* in columns of binary value is replaced by 0. 
 
 **6. Use the package `naniar` to produce a summary, including percentages, of missing data in each column for the `amniota` data.**  
 ```{r}
-
+amniota%>%
+  naniar::miss_var_summary()
+amniota_tidy%>%
+  naniar::miss_var_summary()
 ```
 
 **7. Use the package `naniar` to produce a summary, including percentages, of missing data in each column for the `amphibio` data.**
 ```{r}
-
+amphibio%>%
+  naniar::miss_var_summary()
+amphibio_tidy%>%
+  naniar::miss_var_summary()
 ```
 
 **8. For the `amniota` data, calculate the number of NAs in the `egg_mass_g` column sorted by taxonomic class; i.e. how many NA's are present in the `egg_mass_g` column in birds, mammals, and reptiles? Does this results make sense biologically? How do these results affect your interpretation of NA's?**  
 ```{r}
-
+amniota_tidy%>%
+  select(class, egg_mass_g)%>%
+  group_by(class)%>%
+  naniar::miss_var_summary()
 ```
+#### This is acceptable. Over 99% of mammals do not have eggs, so the value for column 'egg_mass_g' should be almost *NA*. Some reptiles have developed the capability of hetching eggs inside body, so part of this column should be *NA*. Birds always lay eggs, so the *NA* ratio for 'egg_mass_g' should be the lowest. 
 
 **9. The `amphibio` data have variables that classify species as fossorial (burrowing), terrestrial, aquatic, or arboreal.Calculate the number of NA's in each of these variables. Do you think that the authors intend us to think that there are NA's in these columns or could they represent something else? Explain.**
 ```{r}
-
+amphibio%>%
+  select(Fos, Ter, Aqu, Arb)%>%
+  naniar::miss_var_summary()
 ```
+#### These variables store the value as binary: Yes or No. According to this data frame, one choice 'YES' is marked as *1* while the other choice 'No' as *NA*. Thus, in this data frame, the situation 'NO' and "Not Available' is mixed up.  
 
 **10. Now that we know how NA's are represented in the `amniota` data, how would you load the data such that the values which represent NA's are automatically converted?**
 ```{r}
-
+amniota <- 
+  readr::read_csv(file = "data/amniota.csv", 
+                  na = "-999")
+head(amniota, n=5)
 ```
 
 ## Push your final code to GitHub!
