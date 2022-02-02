@@ -11,7 +11,7 @@
 
 <meta name="author" content="Please Add Your Name Here" />
 
-<meta name="date" content="2022-02-01" />
+<meta name="date" content="2022-02-02" />
 
 <title>Lab 8 Homework</title>
 
@@ -372,7 +372,7 @@ pre code {
 
 <h1 class="title toc-ignore">Lab 8 Homework</h1>
 <h4 class="author">Please Add Your Name Here</h4>
-<h4 class="date">2022-02-01</h4>
+<h4 class="date">2022-02-02</h4>
 
 </div>
 
@@ -583,30 +583,29 @@ head(sydneybeaches_long, n=5)</code></pre>
 </ol>
 <pre class="r"><code>sydneybeaches_long %&gt;%
   select(site, year, enterococci_cfu_100ml)%&gt;%
-  unite(&quot;category&quot;, c(&quot;site&quot;, &quot;year&quot;), sep=&quot;_&quot;)%&gt;%
+  unite(category, c(site, year), sep=&quot;_&quot;)%&gt;%
   group_by(category)%&gt;%
   filter(!is.na(enterococci_cfu_100ml))%&gt;%
   summarise(annual_mean=mean(enterococci_cfu_100ml, na.rm = TRUE))%&gt;%
   separate(category, into = c(&quot;site&quot;, &quot;year&quot;), sep = &quot;_&quot;)%&gt;%
   pivot_wider(names_from = &quot;year&quot;, 
               values_from = &quot;annual_mean&quot;)%&gt;%
-  select(&quot;site&quot;, &quot;2018&quot;)%&gt;%
-  rename(&quot;pollution&quot;=&quot;2018&quot;)%&gt;%
-  arrange(desc(pollution))</code></pre>
+  select(site, `2018`)%&gt;%
+  arrange(desc(`2018`))</code></pre>
 <pre><code>## # A tibble: 11 x 2
-##    site                    pollution
-##    &lt;chr&gt;                       &lt;dbl&gt;
-##  1 South Maroubra Rockpool    112.  
-##  2 Little Bay Beach            59.1 
-##  3 Bronte Beach                43.4 
-##  4 Malabar Beach               38.0 
-##  5 Bondi Beach                 22.9 
-##  6 Coogee Beach                21.6 
-##  7 Gordons Bay (East)          17.6 
-##  8 Tamarama Beach              15.5 
-##  9 South Maroubra Beach        12.5 
-## 10 Clovelly Beach              10.6 
-## 11 Maroubra Beach               9.21</code></pre>
+##    site                    `2018`
+##    &lt;chr&gt;                    &lt;dbl&gt;
+##  1 South Maroubra Rockpool 112.  
+##  2 Little Bay Beach         59.1 
+##  3 Bronte Beach             43.4 
+##  4 Malabar Beach            38.0 
+##  5 Bondi Beach              22.9 
+##  6 Coogee Beach             21.6 
+##  7 Gordons Bay (East)       17.6 
+##  8 Tamarama Beach           15.5 
+##  9 South Maroubra Beach     12.5 
+## 10 Clovelly Beach           10.6 
+## 11 Maroubra Beach            9.21</code></pre>
 </div>
 <div id="it-looks-like-south-maroubra-rockpool-experienced-the-most-serious-overall-water-pollution-in-2018." class="section level4">
 <h4>It looks like South Maroubra Rockpool experienced the most serious overall water pollution in 2018.</h4>

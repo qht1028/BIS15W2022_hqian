@@ -123,16 +123,15 @@ sydneybeaches_long %>%
 ```{r}
 sydneybeaches_long %>%
   select(site, year, enterococci_cfu_100ml)%>%
-  unite("category", c("site", "year"), sep="_")%>%
+  unite(category, c(site, year), sep="_")%>%
   group_by(category)%>%
   filter(!is.na(enterococci_cfu_100ml))%>%
   summarise(annual_mean=mean(enterococci_cfu_100ml, na.rm = TRUE))%>%
   separate(category, into = c("site", "year"), sep = "_")%>%
   pivot_wider(names_from = "year", 
               values_from = "annual_mean")%>%
-  select("site", "2018")%>%
-  rename("pollution"="2018")%>%
-  arrange(desc(pollution))
+  select(site, `2018`)%>%
+  arrange(desc(`2018`))
 ```
 
 #### It looks like South Maroubra Rockpool experienced the most serious overall water pollution in 2018. 

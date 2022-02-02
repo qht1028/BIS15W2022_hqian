@@ -1,7 +1,7 @@
 ---
 title: "Lab 8 Homework"
 author: "Please Add Your Name Here"
-date: "2022-02-01"
+date: "2022-02-02"
 output:
   html_document: 
     keep_md: yes
@@ -288,33 +288,32 @@ sydneybeaches_long %>%
 ```r
 sydneybeaches_long %>%
   select(site, year, enterococci_cfu_100ml)%>%
-  unite("category", c("site", "year"), sep="_")%>%
+  unite(category, c(site, year), sep="_")%>%
   group_by(category)%>%
   filter(!is.na(enterococci_cfu_100ml))%>%
   summarise(annual_mean=mean(enterococci_cfu_100ml, na.rm = TRUE))%>%
   separate(category, into = c("site", "year"), sep = "_")%>%
   pivot_wider(names_from = "year", 
               values_from = "annual_mean")%>%
-  select("site", "2018")%>%
-  rename("pollution"="2018")%>%
-  arrange(desc(pollution))
+  select(site, `2018`)%>%
+  arrange(desc(`2018`))
 ```
 
 ```
 ## # A tibble: 11 x 2
-##    site                    pollution
-##    <chr>                       <dbl>
-##  1 South Maroubra Rockpool    112.  
-##  2 Little Bay Beach            59.1 
-##  3 Bronte Beach                43.4 
-##  4 Malabar Beach               38.0 
-##  5 Bondi Beach                 22.9 
-##  6 Coogee Beach                21.6 
-##  7 Gordons Bay (East)          17.6 
-##  8 Tamarama Beach              15.5 
-##  9 South Maroubra Beach        12.5 
-## 10 Clovelly Beach              10.6 
-## 11 Maroubra Beach               9.21
+##    site                    `2018`
+##    <chr>                    <dbl>
+##  1 South Maroubra Rockpool 112.  
+##  2 Little Bay Beach         59.1 
+##  3 Bronte Beach             43.4 
+##  4 Malabar Beach            38.0 
+##  5 Bondi Beach              22.9 
+##  6 Coogee Beach             21.6 
+##  7 Gordons Bay (East)       17.6 
+##  8 Tamarama Beach           15.5 
+##  9 South Maroubra Beach     12.5 
+## 10 Clovelly Beach           10.6 
+## 11 Maroubra Beach            9.21
 ```
 
 #### It looks like South Maroubra Rockpool experienced the most serious overall water pollution in 2018. 
