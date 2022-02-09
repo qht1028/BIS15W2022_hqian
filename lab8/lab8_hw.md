@@ -1,7 +1,7 @@
 ---
 title: "Lab 8 Homework"
 author: "Please Add Your Name Here"
-date: "2022-02-02"
+date: "2022-02-09"
 output:
   html_document: 
     keep_md: yes
@@ -153,10 +153,10 @@ sydneybeaches_long
 4. Pivot the data such that the dates are column names and each beach only appears once. Name the object `sydneybeaches_wide`
 
 ```r
-sydneybeaches_long <- sydneybeaches_long%>%
+sydneybeaches_wide <- sydneybeaches_long%>%
   pivot_wider(names_from = "date", 
               values_from = "enterococci_cfu_100ml")
-head(sydneybeaches_long, n=5)
+head(sydneybeaches_wide, n=5)
 ```
 
 ```
@@ -181,7 +181,7 @@ head(sydneybeaches_long, n=5)
 5. Pivot the data back so that the dates are data and not column names.
 
 ```r
-sydneybeaches_ori <- sydneybeaches_long%>%
+sydneybeaches_ori <- sydneybeaches_wide%>%
   pivot_longer(cols = c(contains("20")), 
                names_to = "date", 
                values_to = "enterococci_cfu_100ml")

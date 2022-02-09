@@ -1,7 +1,7 @@
 ---
 title: "Lab 10 Homework"
 author: "Hongtao Qian"
-date: "2022-02-08"
+date: "2022-02-09"
 output:
   html_document: 
     keep_md: yes
@@ -136,10 +136,11 @@ deserts%>%
 ```r
 deserts%>%
   ggplot(aes(x=taxa, fill=plot_type))+
-  geom_bar(position=position_fill())+
+  geom_bar(position="dodge")+
   labs(title = "Study Proportion Summary", 
        x="Taxa", 
        y="Ratio")+
+  scale_y_log10()+
   theme(plot.title=element_text(hjust=.5))
 ```
 
@@ -192,15 +193,13 @@ deserts%>%
 ```r
 deserts%>%
   filter(!is.na(weight))%>%
-  count(species, taxa, plot_type)%>%
-  ggplot(aes(x=species, y=n, color=plot_type))+
-  geom_point()+
-  scale_y_log10()+
-  theme(axis.text.x = element_text(angle = 60, hjust = 1))+
-  labs(title = "Measurements per Species", 
-       x="Species", 
-       y="Count")+
-  theme(plot.title=element_text(hjust=.5))
+ ggplot(aes(x=species_id, y=weight)) +
+  geom_boxplot()+
+  geom_point(alpha=0.3, color="tomato", position = "jitter") +
+  coord_flip()+
+  labs(title = "Distribution of weight for each species",
+       x = "Species ID",
+       y = "Weight")
 ```
 
 ![](lab10_hw_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
@@ -215,6 +214,7 @@ deserts%>%
   summarise(n=n())%>%
   ggplot(aes(x=year, y=n))+
   geom_smooth(se=F)+
+  geom_col(alpha=.3)+
   labs(title = "Study Frequency over Time", 
        x="Year", 
        y="Count")+
@@ -236,8 +236,8 @@ deserts%>%
   geom_point(alpha=.2)+
   geom_smooth(se=T)+
   labs(title = "Weight over Hindfoot Length", 
-       x="Taxa", 
-       y="Count")+
+       x="Weight", 
+       y="Hindfoot Length")+
   theme(plot.title=element_text(hjust=.5))
 ```
 
@@ -291,7 +291,7 @@ deserts%>%
   geom_boxplot()+
   labs(title = "Weight over Hindfoot Length for Albigula and Spectabilis", 
        x="Species", 
-       y="Count")+
+       y="Ratio")+
   theme(plot.title=element_text(hjust=.5))
 ```
 

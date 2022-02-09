@@ -11,7 +11,7 @@
 
 <meta name="author" content="Please Add Your Name Here" />
 
-<meta name="date" content="2022-02-02" />
+<meta name="date" content="2022-02-09" />
 
 <title>Lab 8 Homework</title>
 
@@ -372,7 +372,7 @@ pre code {
 
 <h1 class="title toc-ignore">Lab 8 Homework</h1>
 <h4 class="author">Please Add Your Name Here</h4>
-<h4 class="date">2022-02-02</h4>
+<h4 class="date">2022-02-09</h4>
 
 </div>
 
@@ -479,10 +479,10 @@ sydneybeaches_long</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Pivot the data such that the dates are column names and each beach only appears once. Name the object <code>sydneybeaches_wide</code></li>
 </ol>
-<pre class="r"><code>sydneybeaches_long &lt;- sydneybeaches_long%&gt;%
+<pre class="r"><code>sydneybeaches_wide &lt;- sydneybeaches_long%&gt;%
   pivot_wider(names_from = &quot;date&quot;, 
               values_from = &quot;enterococci_cfu_100ml&quot;)
-head(sydneybeaches_long, n=5)</code></pre>
+head(sydneybeaches_wide, n=5)</code></pre>
 <pre><code>## # A tibble: 5 x 345
 ##   site          `02/01/2013` `06/01/2013` `12/01/2013` `18/01/2013` `30/01/2013`
 ##   &lt;chr&gt;                &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
@@ -501,7 +501,7 @@ head(sydneybeaches_long, n=5)</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li>Pivot the data back so that the dates are data and not column names.</li>
 </ol>
-<pre class="r"><code>sydneybeaches_ori &lt;- sydneybeaches_long%&gt;%
+<pre class="r"><code>sydneybeaches_ori &lt;- sydneybeaches_wide%&gt;%
   pivot_longer(cols = c(contains(&quot;20&quot;)), 
                names_to = &quot;date&quot;, 
                values_to = &quot;enterococci_cfu_100ml&quot;)
