@@ -1,7 +1,7 @@
 ---
 title: "Lab 10 Homework"
 author: "Hongtao Qian"
-date: "2022-02-09"
+date: "2022-02-10"
 output:
   html_document: 
     keep_md: yes
@@ -77,6 +77,18 @@ glimpse(deserts)
 #### *NA* is used to indicate non availble data. Names of all columns are clean and neat. 
 
 2. How many genera and species are represented in the data? What are the total number of observations? Which species is most/ least frequently sampled in the study?
+
+```r
+deserts%>%
+  summarise(n_genus=n_distinct(genus), n_species=n_distinct(species))
+```
+
+```
+## # A tibble: 1 x 2
+##   n_genus n_species
+##     <int>     <int>
+## 1      26        40
+```
 
 ```r
 deserts%>%

@@ -40,6 +40,8 @@ glimpse(deserts)
 2. How many genera and species are represented in the data? What are the total number of observations? Which species is most/ least frequently sampled in the study?
 ```{r}
 deserts%>%
+  summarise(n_genus=n_distinct(genus), n_species=n_distinct(species))
+deserts%>%
   count(species, genus, sort=T)
 ```
 #### Merriami of Dipodomys is most frequently sampled. Several species are sampled only once or twice. 
