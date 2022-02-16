@@ -1,0 +1,30 @@
+---
+title: "15L group project"
+author: "Hongtao Qian"
+date: "2022/2/15"
+output:
+  html_document: 
+    keep_md: yes
+    theme: spacelab
+---
+
+## Seed Variability
+The data set used here is on [New Phytologist](https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.16617). Pearse, I.S., LaMontagne, J.M., Lordon, M., Hipp, A.L. and Koenig, W.D. (2020), Biogeography and phylogeny of masting: do global patterns fit functional hypotheses?. New Phytol, 227: 1557-1567. 
+```{r}
+library(tidyverse)
+library(skimr)
+library(ggplot2)
+library(here)
+library(janitor)
+```
+
+1. Data load from the original CSV file. 
+```{r}
+seed <- read.csv(here("project", "data", "interannual_variability.csv"))%>%
+  clean_names()%>%
+  select(!contains("sd_"))%>%
+  select(!contains("acf"))%>%
+  select(!contains("mid"))
+head(seed, n=5)
+```
+
