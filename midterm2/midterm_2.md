@@ -248,6 +248,8 @@ life%>%
 ## # ... with 177 more rows
 ```
 
+#### In population set, 195 different countries are included. In gdp set, 193 different countries are included. In life expectancy set, 187 different countries are included. 
+
 ## Life Expectancy  
 
 3. (2 points) Let's limit the data to 100 years (1920-2020). For these years, which country has the highest average life expectancy? How about the lowest average life expectancy?  
@@ -323,6 +325,7 @@ life%>%
 
 ![](midterm_2_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
+#### The improvement occured around 1950s. This should indicate the end of the WWII. 
 
 ## Population Growth
 6. (3 points) Which 5 countries have had the highest population growth over the past 100 years (1920-2020)?  
@@ -453,7 +456,7 @@ gapminder_join%>%
                                   population >= 10000000 & population <= 100000000 ~ "Medium country",
                                   population >= 100000000 ~ "Big country"))%>%
   ggplot(aes(x=gdp_per_capita, y=expectancy, color=country_category))+
-  annotate("rect", xmin=100000, xmax=160000, ymin=0, ymax=90, alpha=0.2)+
+  annotate("rect", xmin=100000, xmax=175000, ymin=0, ymax=90, alpha=0.2)+
   geom_smooth(alpha=.8, se=F)+
   labs(title = "The Relationship betweem Life Expectancy and GDP per Person", 
        x="GDP per Person (dollar)", 
