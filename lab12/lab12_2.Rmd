@@ -40,6 +40,7 @@ If you completed part 1 of today's lab then you should have the following packag
 library(tidyverse)
 library(here)
 library(janitor)
+library(ggplot2)
 library(ggmap)
 ```
 
